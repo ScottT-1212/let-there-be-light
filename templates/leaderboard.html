@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+
+{% block title %} | Leaderboard {% endblock %}
+
+
+{% block heading %}
+    {% if not leaderboard %}
+    {% else %}
+        Level {{ leaderboard[0]["level_number"] }} leaderboard
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    {% if request.method == "POST" %}
+        <div class="section">
+            <!--Leaderboard table goes here-->
+            {% if not leaderboard %}
+                <p>No scores have been submitted for that level</p>
+            {% else %}
+                <table class="leaderboard">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in leaderboard %}
+                            <tr>
+                                <td>{{ row.player_name }}</td>
+                                <td>{{ row.score }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <div class="section">
+        <h3>Which level do you want to view the highscore for?</h3>
+        <form action="/leaderboard" method="post">
+            <div>
+                <select name="level" id="level-select">
+                    <option value="0" diasbled>Select level: </option>
+                    {% for row in levels %}
+                        <option value="{{row['number']}}">Level {{row['number']}}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="navigation">Show highscores</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

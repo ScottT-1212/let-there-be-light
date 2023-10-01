@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+
+{% block title %}{% endblock %}
+
+{% block heading %} Objective: Turn all of the lights on {% endblock %}
+
+{% block main %}
+    <p class="tutorial">
+        Let there be light is a puzzle game. You will be given a 3x3 grid of light boxes,
+        each of which will be on or off. Clicking a light box will
+        toggle the switch on or off. Click wisely though, because every click will also toggle
+        the adjacent switches. How many clicks will it take you to turn all of the lights on?
+    </p>
+    <div class="section">
+        <form action="/practice">
+            <a>Click here to practice on a blank grid of switches</a>
+            <button class="navigation">Practice</button>
+        </form>
+    </div>
+
+    <div class="section">
+        {% if "user" in session %}
+            <form action="/game">
+                <a>Select a level to play</a>
+                <select name="level" id="level-select">
+                    <option value="0" diasbled>Select level: </option>
+                    {% for row in levels %}
+                        <option value="{{row['number']}}">Level {{row['number']}}</option>
+                    {% endfor %}
+                </select>
+                <button class="navigation">Play</button>
+            </form>
+        {% else %}
+            <form action="/login">
+                <button class="navigation">Login</button> <a>to start playing</a>
+            </form>
+        {% endif %}
+    </div>
+
+{% endblock %}

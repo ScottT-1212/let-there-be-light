@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    | level {{ levels['number'] }}
+{% endblock %}
+
+{% block heading %}
+    Level {{ levels['number'] }}
+{% endblock %}
+
+{% block main %}
+    <div>
+        <p>Click counter: <span id="clicks">0</span></p>
+        <table>
+            <tr>
+                <td>
+                    <button class="{{levels['0,0']}}" data-type="game" id="0,0"></button>
+                </td>
+                <td>
+                    <button class="{{levels['0,1']}}" data-type="game" id="0,1"></button>
+                </td>
+                <td>
+                    <button class="{{levels['0,2']}}" data-type="game" id="0,2"></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="{{levels['1,0']}}" data-type="game" id="1,0"></button>
+                </td>
+                <td>
+                    <button class="{{levels['1,1']}}" data-type="game" id="1,1"></button>
+                </td>
+                <td>
+                    <button class="{{levels['1,2']}}" data-type="game" id="1,2"></button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="{{levels['2,0']}}" data-type="game" id="2,0"></button>
+                </td>
+                <td>
+                    <button class="{{levels['2,1']}}" data-type="game" id="2,1"></button>
+                </td>
+                <td>
+                    <button class="{{levels['2,2']}}" data-type="game" id="2,2"></button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section" id="win-section" style="display:none;">
+        <h3 id="win"></h3>
+        <p id="win-message"></p>
+
+        <form action="/game" method="post">
+            <input type="hidden" id="score" name="score">
+            <input type="hidden" id="level_numer" name="level_number" value="{{ levels['number'] }}">
+            <button class="navigation" id="submit-score">Submit score to the leaderboard?</button>
+        </form>
+        <button class=navigation><a href="/">Play another level?</a></button>
+    </div>
+{% endblock %}

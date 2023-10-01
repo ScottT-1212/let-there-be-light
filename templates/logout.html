@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+
+{% block title %} | Logout {% endblock %}
+
+{% block heading %}
+    Logged in as {{ user }}
+{% endblock %}
+
+{% block main %}
+    <div class="section">
+        <form action="logout" method="post">
+            <button class="navigation">Logout</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <link href="/static/style.css" rel="stylesheet">
+        <link href="/static/favicon.ico" rel="icon" type="image/x-icon">
+        <script src="/static/script.js"></script>
+        <title> Let there be light{% block title %}{% endblock %}</title>
+    </head>
+
+    <body>
+        <!-- Navbar -->
+        <nav style="margin-bottom:10px;">
+            <ul>
+                <li><a href="/"><img src="static/favicon.ico" alt="lightbulb"></a></li>
+                <li><a class="navbar" href="/">Play</a></li>
+                <li><a class="navbar" href="practice">Practice</a></li>
+                <li><a class="navbar" href="leaderboard">Leaderboard</a></li>
+                {% if "user" in session %}
+                    <li><a class="navbar" href="logout">Logout</a></li>
+                {% else %}
+                    <li><a class="navbar" href="login">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div>
+                        <a class="flash">{{ message }}</a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div class="section">
+            <h1>Let there be <span style="color: yellow;">light</span></h1>
+            <h3 title="Click on a box to toggle the light">
+                {% block heading %}{% endblock %}
+            </h3>
+        </div>
+        {% block main %}{% endblock %}
+    </body>
+
+</html>
